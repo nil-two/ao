@@ -86,6 +86,26 @@ Display usage.
 
 Display version information.
 
+Specification
+-------------
+
+### Request
+
+`ao` exchange requests with JSON.
+The structure is as follows:
+
+```
+{
+  "cmd": ["<command>", "<arg-1>", "<arg-2>", ... "<arg-n>"]
+}
+```
+
+You can also send a request by using curl as follows:
+
+```
+$ curl -H 'Content-Type: application/json' -d '{"cmd":["ls"]}' localhost:60080
+```
+
 License
 -------
 
