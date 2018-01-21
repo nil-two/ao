@@ -74,8 +74,8 @@ To change the port, specify it with `-port`.
 $ ao o seq 5
 (send a request to execute "seq 5" to 60080 port)
 
-$ ao a -port 50180 seq 5
-(send w request to execute "seq 5" to 50180 port)
+$ ao o -port 50180 seq 5
+(send o request to execute "seq 5" to 50180 port)
 ```
 
 ### h, help
