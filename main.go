@@ -13,7 +13,7 @@ import (
 
 const (
 	cliName    = "ao"
-	cliVersion = "0.0.0"
+	cliVersion = "0.1.0"
 )
 
 type CLI struct {
