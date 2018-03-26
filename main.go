@@ -72,7 +72,7 @@ func (c *CLI) await(args []string) int {
 }
 
 func (c *CLI) order(args []string) int {
-	f := flag.NewFlagSet("await", flag.ContinueOnError)
+	f := flag.NewFlagSet("order", flag.ContinueOnError)
 	f.SetOutput(ioutil.Discard)
 
 	port := f.Int("port", 60080, "port number")
