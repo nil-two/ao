@@ -1,13 +1,10 @@
 package main
 
 import (
-	"bytes"
-	"encoding/json"
 	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"os"
 )
 
@@ -79,23 +76,11 @@ func (c *CLI) order(args []string) int {
 		c.printError(err)
 		return 2
 	}
+
 	cmd := f.Args()
 
-	b, err := json.Marshal(&Request{Cmd: cmd})
-	if err != nil {
-		c.printError(err)
-		return 1
-	}
-
-	url := fmt.Sprintf("http://localhost:%d/", *port)
-	res, err := http.Post(url, "application/json", bytes.NewReader(b))
-	if err != nil {
-		c.printError(err)
-		return 1
-	}
-	defer res.Body.Close()
-
-	if _, err = io.Copy(c.stdout, res.Body); err != nil {
+	client := NewClient(*port, c.stdout)
+	if err := client.Order(cmd); err != nil {
 		c.printError(err)
 		return 1
 	}
