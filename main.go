@@ -62,9 +62,8 @@ func (c *CLI) await(args []string) int {
 		return 2
 	}
 
-	addr := fmt.Sprintf(":%d", *port)
-	handler := NewHandler(c.stdout, c.stderr)
-	if err := http.ListenAndServe(addr, handler); err != nil {
+	server := NewServer(*port, c.stdout, c.stderr)
+	if err := server.Serve(); err != nil {
 		c.printError(err)
 		return 1
 	}
@@ -145,10 +144,10 @@ func (c *CLI) Run(args []string) int {
 		return c.help(args[1:])
 	case "v", "version":
 		return c.version(args[1:])
+	default:
+		c.printError(cmd + ": no such command")
+		return 1
 	}
-
-	c.printError(cmd + ": no such command")
-	return 1
 }
 
 func main() {

@@ -14,9 +14,25 @@ type Request struct {
 	Chdir string   `json:"chdir,omitempty"`
 }
 
+type Server struct {
+	addr    string
+	handler *Handler
+}
+
 type Handler struct {
 	stdout io.Writer
 	stderr io.Writer
+}
+
+func NewServer(port int, stdout io.Writer, stderr io.Writer) *Server {
+	return &Server{
+		addr:    fmt.Sprintf(":%d", port),
+		handler: NewHandler(stdout, stderr),
+	}
+}
+
+func (s *Server) Serve() error {
+	return http.ListenAndServe(s.addr, s.handler)
 }
 
 func NewHandler(stdout io.Writer, stderr io.Writer) *Handler {
