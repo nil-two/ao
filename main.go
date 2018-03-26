@@ -104,11 +104,27 @@ func (c *CLI) order(args []string) int {
 }
 
 func (c *CLI) help(args []string) int {
+	f := flag.NewFlagSet("help", flag.ContinueOnError)
+	f.SetOutput(ioutil.Discard)
+
+	if err := f.Parse(args); err != nil {
+		c.printError(err)
+		return 2
+	}
+
 	c.printUsage()
 	return 0
 }
 
 func (c *CLI) version(args []string) int {
+	f := flag.NewFlagSet("version", flag.ContinueOnError)
+	f.SetOutput(ioutil.Discard)
+
+	if err := f.Parse(args); err != nil {
+		c.printError(err)
+		return 2
+	}
+
 	c.printVersion()
 	return 0
 }
