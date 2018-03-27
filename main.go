@@ -76,6 +76,10 @@ func (c *CLI) order(args []string) int {
 		c.printError(err)
 		return 2
 	}
+	if f.NArg() < 1 {
+		c.printError("no input cmd")
+		return 2
+	}
 
 	cmd := f.Args()
 
