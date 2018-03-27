@@ -57,6 +57,12 @@ func (h *Handler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	if r.Cmd == nil || len(r.Cmd) == 0 {
+		res.WriteHeader(421)
+		fmt.Fprintln(res, "no input cmd")
+		return
+	}
+
 	cmd := exec.Command(r.Cmd[0], r.Cmd[1:]...)
 	cmd.Stdout = h.stdout
 	cmd.Stderr = h.stderr
