@@ -42,7 +42,7 @@ Installation
 ### go get
 
 ```
-go get github.com/nil2nekoni/ao
+go get github.com/nil-two/ao
 ```
 
 Commands
